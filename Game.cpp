@@ -46,7 +46,7 @@ void Game::Update(GLfloat delta)
 
 void Game::ProcessInput(GLfloat delta)
 {
-   GLfloat velocity = PLAYER_VELOCITY * delta;
+   GLfloat velocity = OBJECT_VELOCITY * delta;
    if (this->Keys[GLFW_KEY_A])
    {
       // Needs to be coverted to use getters and setters
