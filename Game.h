@@ -9,6 +9,8 @@
 
 const glm::vec2 OBJECT_SIZE(99, 87);
 const GLfloat OBJECT_VELOCITY(500.0f);
+const GLuint WIDTH = 800;
+const GLuint HEIGHT = 600;
 
 class Game {
    private:
@@ -18,7 +20,7 @@ class Game {
       Game() {}
       Game(GLuint width, GLuint height);
    public:
-      static Game& getInstance(GLuint width, GLuint height) {
+      static Game& getInstance(GLuint width = WIDTH, GLuint height = HEIGHT) {
          static Game instance = Game(width, height);
 
          return instance;
