@@ -42,6 +42,7 @@ int main(int argc, char *argv[])
 }
 
 /*###########################################################
+ * TODO: 
  * Algorithm for key_callback routine we will use to
  *   pass control to the game singleton:
  *   Check if int key is in range (0-1024)

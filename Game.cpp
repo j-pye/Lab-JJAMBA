@@ -11,9 +11,9 @@ Game::Game(GLuint width, GLuint height): Keys(), Width(width), Height(height)
 
 }
 
-/*###############################################/
- * Add code to Load a Texture for Background image.
- *###############################################*/
+/*########################################################/
+ * TODO: Add code to Load a Texture for Background image.
+ *#######################################################*/
 void Game::Init(GLFWwindow* window)
 {
 
@@ -69,7 +69,7 @@ void Game::Update(GLfloat delta)
 }
 
 /*###############################################/
- * Add code to Move ship / object up,
+ * TODO: Add code to Move ship / object up,
  *    down, left and right.
  *###############################################*/
 void Game::ProcessInput(GLfloat delta)
@@ -84,7 +84,7 @@ void Game::ProcessInput(GLfloat delta)
 }
 
 /*###############################################/
- * Add Code to Render a Background image
+ * TODO: Add Code to Render a Background image
  *###############################################*/
 void Game::Render()
 {
