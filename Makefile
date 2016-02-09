@@ -8,7 +8,7 @@ OBJECTS=$(SRCOBJ:.cpp=.o)
 OBJCOMP=$(addprefix objects/,$(SOURCES:.cpp=.o))
 EXECUTABLE=game
 
-all: $(SOURCES) $(EXECUTABLE)
+all: $(SRCOBJ) $(EXECUTABLE)
 
 $(EXECUTABLE): $(OBJECTS)
 	 $(CC) $(LDFLAGS) $(OBJCOMP) -o $@
