@@ -1,15 +1,10 @@
 CC=g++
 CFLAGS=-c -O3 -std=c++11
 LDFLAGS= -lglut -lGL -lGLU -lGLEW -lglfw -lX11 -lm -lSOIL
-SOURCES= Main.cpp \
-			Game.cpp \
-			GameObject.cpp \
-			Shader.cpp \
-			AssetController.cpp \
-			RenderSprite.cpp \
-			Texture.cpp
+SOURCES= Main.cpp Game.cpp GameObject.cpp Shader.cpp AssetController.cpp RenderSprite.cpp Texture.cpp
+SRCOBJ= Main.cpp Game.cpp GameObject.cpp
 OBJDIR=objects
-OBJECTS=$(SOURCES:.cpp=.o)
+OBJECTS=$(SRCOBJ:.cpp=.o)
 OBJCOMP=$(addprefix objects/,$(SOURCES:.cpp=.o))
 EXECUTABLE=game
 
