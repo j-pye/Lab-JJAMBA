@@ -18,7 +18,8 @@ int main(int argc, char *argv[])
    glfwSetErrorCallback(error_callback);
    glfwInit();
    glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
-   GLFWwindow* window = glfwCreateWindow(SCREEN_WIDTH, SCREEN_HEIGHT,"JJAMBA Lab", nullptr, nullptr);
+   GLFWwindow* window = glfwCreateWindow(SCREEN_WIDTH, SCREEN_HEIGHT,
+                        "JJAMBA Lab", nullptr, nullptr);
 
    glfwMakeContextCurrent(window);
    glewInit();
@@ -27,9 +28,6 @@ int main(int argc, char *argv[])
 
    // OpenGL configuration
    glViewport(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-   //glEnable(GL_CULL_FACE);
-   //glEnable(GL_BLEND);
-   //glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
    // Initialize game
    Game::getInstance(SCREEN_WIDTH, SCREEN_HEIGHT).Init(window);
@@ -44,12 +42,10 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
       glfwSetWindowShouldClose(window, GL_TRUE);
    if (key >= 0 && key < 1024)
    {
-      /*if (action == GLFW_PRESS)
-         Strike.Keys[key] = GL_TRUE;
+      if (action == GLFW_PRESS)
+         Game::getInstance(SCREEN_WIDTH, SCREEN_HEIGHT).KeyPressed(key);
       else if (action == GLFW_RELEASE)
-         Strike.Keys[key] = GL_FALSE;
-         Strike.KeysProcessed[key] = GL_FALSE;
-      */
+         Game::getInstance(SCREEN_WIDTH, SCREEN_HEIGHT).KeyReleased(key);
    }
 }
 

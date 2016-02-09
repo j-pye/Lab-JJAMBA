@@ -4,6 +4,7 @@
 #include <vector>
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
+#define GLM_FORCE_RADIANS
 #include <glm/glm.hpp>
 
 const glm::vec2 OBJECT_SIZE(99, 87);
@@ -26,6 +27,8 @@ class Game {
       void ProcessInput(GLfloat delta);
       void Update(GLfloat delta);
       void Render();
+      void KeyPressed(int key);
+      void KeyReleased(int key);
 };
 
 #endif

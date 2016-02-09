@@ -1,8 +1,25 @@
-CC = g++
-LDLIBS = -lglut -lGL -lGLU -lGLEW -lglfw -lX11 -lm -lSOIL -lfreetype -lz -lpng12
-OBJ = Main.cpp \
-      Game.cpp \
-      GameObject.cpp \
+CC=g++
+CFLAGS=-c -O3 -std=c++11
+LDFLAGS= -lglut -lGL -lGLU -lGLEW -lglfw -lX11 -lm -lSOIL
+SOURCES= Main.cpp \
+			Game.cpp \
+			GameObject.cpp \
+			Shader.cpp \
+			AssetController.cpp \
+			RenderSprite.cpp \
+			Texture.cpp
+OBJDIR=objects
+OBJECTS=$(SOURCES:.cpp=.o)
+OBJCOMP=$(addprefix objects/,$(SOURCES:.cpp=.o))
+EXECUTABLE=game
 
-All: $(OBJ)
-	$(CC) -std=c++11 -I/usr/include/freetype2 $(OBJ)  $(LDLIBS) -o game
+all: $(SOURCES) $(EXECUTABLE)
+
+$(EXECUTABLE): $(OBJECTS)
+	 $(CC) $(LDFLAGS) $(OBJCOMP) -o $@
+
+.cpp.o:
+	 $(CC) $(CFLAGS) $< -o $(OBJDIR)/$@
+
+clean:
+	-@rm objects/Main.o objects/Game.o objects/GameObject.o game 2>/dev/null || true

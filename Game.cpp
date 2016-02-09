@@ -1,7 +1,10 @@
 #include "Game.h"
 #include "GameObject.h"
+#include "AssetController.h"
+#include "RenderSprite.h"
 
-GameObject *Player;
+RenderSprite *Renderer;
+GameObject *Obj1;
 
 Game::Game(GLuint width, GLuint height): Keys(), Width(width), Height(height)
 {
@@ -10,10 +13,29 @@ Game::Game(GLuint width, GLuint height): Keys(), Width(width), Height(height)
 
 void Game::Init(GLFWwindow* window)
 {
-   // DeltaTime variables
+
+   // Load shaders
+   AssetController::LoadShader("shaders/sprite.vs", "shaders/sprite.frag", nullptr, "sprite");
+   // Configure shaders
+   glm::mat4 projection = glm::ortho(0.0f, static_cast<GLfloat>(this->Width), static_cast<GLfloat>(this->Height), 0.0f, -1.0f, 1.0f);
+   AssetController::GetShader("sprite").Use().SetInteger("image", 0);
+   AssetController::GetShader("sprite").SetMatrix4("projection", projection);
+
+   // Load textures
+   AssetController::LoadTexture("textures/ship.png", GL_TRUE, "ship");
+    // Set render-specific controls
+   Shader myShader = AssetController::GetShader("sprite");
+   Renderer = new RenderSprite(myShader);
+
+   glm::vec2 objectPos = glm::vec2(
+         this->Width / 2 - OBJECT_SIZE.x / 2, // Middle
+         this->Height - OBJECT_SIZE.y); // Bottom
+   Obj1 = new GameObject(objectPos, OBJECT_SIZE, AssetController::GetTexture("ship"));
+
+
+   // Initialize Frames and deltaTime before main loop
    GLfloat deltaTime = 0.0f;
    GLfloat lastFrame = 0.0f;
-
    while (!glfwWindowShouldClose(window))
    {
       // TIME WARP - find delta time
@@ -50,11 +72,24 @@ void Game::ProcessInput(GLfloat delta)
    if (this->Keys[GLFW_KEY_A])
    {
       // Needs to be coverted to use getters and setters
-      //if (Player->Position.x >= 0) Player->Position.x -= velocity;
+      if (Obj1->Position.x >= 0) Obj1->Position.x -= velocity;
    }
 }
 
 void Game::Render()
 {
+   Obj1->Draw(*Renderer);
+}
 
+void Game::KeyPressed(int key)
+{
+   Keys[key] = GL_TRUE;
+   printf("Key Pressed\n");
+}
+
+void Game::KeyReleased(int key)
+{
+   Keys[key] = GL_FALSE;
+   KeysProcessed[key] = GL_FALSE;
+   printf("Key Released\n");
 }
