@@ -22,12 +22,17 @@ int main(int argc, char *argv[])
                         "JJAMBA Lab", nullptr, nullptr);
 
    glfwMakeContextCurrent(window);
+   glewExperimental = GL_TRUE;
    glewInit();
    glGetError();
    glfwSetKeyCallback(window, key_callback);
 
    // OpenGL configuration
    glViewport(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+   glEnable(GL_CULL_FACE);
+   glEnable(GL_BLEND);
+   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
 
    // Initialize game
    Game::getInstance(SCREEN_WIDTH, SCREEN_HEIGHT).Init(window);
@@ -53,6 +58,11 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 {
    if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
       glfwSetWindowShouldClose(window, GL_TRUE);
+   if (key >= 0 || key <= 1024) {
+      if (action == GLFW_PRESS) Game::getInstance().KeyPressed(key);
+      if (action == GLFW_RELEASE) Game::getInstance().KeyReleased(key);
+
+   }
 }
 
 void error_callback(int error, const char* description)
