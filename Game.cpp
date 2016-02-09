@@ -11,6 +11,9 @@ Game::Game(GLuint width, GLuint height): Keys(), Width(width), Height(height)
 
 }
 
+/*###############################################/
+ * Add code to Load a Texture for Background image.
+ *###############################################*/
 void Game::Init(GLFWwindow* window)
 {
 
@@ -65,17 +68,24 @@ void Game::Update(GLfloat delta)
 
 }
 
-
+/*###############################################/
+ * Add code to Move ship / object up,
+ *    down, left and right.
+ *###############################################*/
 void Game::ProcessInput(GLfloat delta)
 {
    GLfloat velocity = OBJECT_VELOCITY * delta;
    if (this->Keys[GLFW_KEY_A])
    {
-      // Needs to be coverted to use getters and setters
+      // Did not get the chance to change game objects to have getter/setter for this
+      // Press A to move Left.
       if (Obj1->Position.x >= 0) Obj1->Position.x -= velocity;
    }
 }
 
+/*###############################################/
+ * Add Code to Render a Background image
+ *###############################################*/
 void Game::Render()
 {
    Obj1->Draw(*Renderer);

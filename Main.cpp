@@ -36,17 +36,23 @@ int main(int argc, char *argv[])
    return 0;
 }
 
+/*###########################################################
+ * Algorithm for key_callback routine we will use to
+ *   pass control to the game singleton:
+ *   Check if int key is in range (0-1024)
+ *   If action is GLFW_PRESS,
+ *      then set Keys[key] using Game.KeyPressed(key)
+ *   else if action is GLFW_RELEASE,
+ *     then set Keys[key] using Game.KeyReleased(key)
+ *
+ * After control is set in the Game singleton,
+ *   you can use the currently pressed key data in the
+ *   processInput function.
+/*##########################################################*/
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode)
 {
    if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
       glfwSetWindowShouldClose(window, GL_TRUE);
-   if (key >= 0 && key < 1024)
-   {
-      if (action == GLFW_PRESS)
-         Game::getInstance(SCREEN_WIDTH, SCREEN_HEIGHT).KeyPressed(key);
-      else if (action == GLFW_RELEASE)
-         Game::getInstance(SCREEN_WIDTH, SCREEN_HEIGHT).KeyReleased(key);
-   }
 }
 
 void error_callback(int error, const char* description)
